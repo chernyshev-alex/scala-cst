@@ -1,10 +1,6 @@
 import org.scalatest.funsuite.AnyFunSuite
 
-
 class StreamsTests extends AnyFunSuite {
-    test("readfile") {
-        FSStream.f1("ABC 123")
-    }
 
     test("is_prime") {
         assert(FSStream.is_prime(3), true)

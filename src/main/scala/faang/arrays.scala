@@ -38,7 +38,6 @@ object arrays {
     var (lmax, rmax) = (0,0)
     var (li, ri) = (0, height.length -1)
     while (li < ri) {
-
       if (height(li) <= height(ri)) {
 
         if (height(li) >= lmax) {
@@ -47,9 +46,7 @@ object arrays {
           result += lmax - height(li)
         }
         li +=1
-
       } else {
-
         if (height(ri) >= rmax) {
 				  rmax = height(ri)
         } else {

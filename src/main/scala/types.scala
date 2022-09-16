@@ -13,7 +13,7 @@ object Clazz {
 object Types {
 
   def testClazz() : (Int, String, Int)  = Clazz(0, 1) match { 
-    case Clazz(a, b, c) => (a, b, c) 
+    // case Clazz(a, b, c) => (a, b, c)
     case _  => (0, "", -1)
   }
 

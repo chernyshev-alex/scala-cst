@@ -1,7 +1,6 @@
 package faang
 
 import org.scalatest.funsuite.AnyFunSuite
-import cats.instances.boolean
 
 class StackTest extends AnyFunSuite {
 

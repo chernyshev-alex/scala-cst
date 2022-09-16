@@ -1,25 +1,6 @@
 import scala.collection.mutable
-import fs2.io.file.Files
-import cats.effect.IO
 
 object FSStream {
-  def f1(s: String): String = {
-    val cnt = mutable.HashMap.empty[String, Int]
-    val src = scala.io.Source.fromString(s)
-    src
-      .getLines()
-      .toList
-      .flatMap(_.split("\\W+"))
-      .foreach { w =>
-        cnt += w -> (cnt.getOrElse(w, 0) + 1)
-      }
-      src.close()
-
-    val res = cnt.foldLeft("") {
-      case (a, (k, v))  => a + s"$k=$v"
-    }
-    return res
-  }
 
   def fibo() : Stream[BigInt] =  {
     lazy val fibs : Stream[BigInt] = BigInt(0) #:: BigInt(1) #:: fibs.zip(fibs.tail).map( n => n._1 + n._2)

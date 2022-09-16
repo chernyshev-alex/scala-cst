@@ -27,7 +27,7 @@ object arr2d {
       var result = Array.empty[Int]
       val q = mutable.Queue.empty[(Int, Int)]
 
-      q.addOne((0,0))
+      q.enqueue((0,0))
       while (q.length > 0) {
         val (r, c) = q.dequeue()
         if (r < 0 || c < 0 || r >= n.length || c >= n(0).length  || visited(r)(c) == 1) {
