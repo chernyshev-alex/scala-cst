@@ -33,7 +33,6 @@ object arr2d {
         if (r < 0 || c < 0 || r >= n.length || c >= n(0).length  || visited(r)(c) == 1) {
           ;
         } else {
-          println(s"$r $c")
           visited(r)(c) = 1
           result = result :+ n(r)(c)
           DIRS.foreach (d => q.enqueue((r + d(0), c + d(1))))
