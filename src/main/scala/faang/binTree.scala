@@ -83,10 +83,21 @@ object binTree {
         if (n.get.value <= min || n.get.value >= max) {
             return false;
         }
-        return  __isValidBST(n.get.left, min, n.get.value)  && __isValidBST(n.get.right, n.get.value, max);
+        return  __isValidBST(n.get.left, min, n.get.value)  && __isValidBST(n.get.right, n.get.value, max)
     }
 
     def isValidBST(root : Option[TreeNode]) = 
-        __isValidBST(root, Int.MinValue, Int.MaxValue);
+        __isValidBST(root, Int.MinValue, Int.MaxValue)
     
+
+    def rangeSumBST(root : Option[TreeNode], low : Int, high : Int) : Int = {
+        if(root.isEmpty)
+            return 0
+        
+        val result = rangeSumBST(root.get.left,  low, high) + rangeSumBST(root.get.right, low, high); 
+        if(root.get.value >= low && root.get.value <= high)
+            return root.get.value + result
+        result
+    }
+
 }

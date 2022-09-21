@@ -60,4 +60,17 @@ class BinTreeTest extends AnyFunSuite {
 
         assert(false == binTree.isValidBST(Some(root)))
     }
+
+    // Range Sum of BST
+    //
+    // Given the root node of a binary search tree and two integers low and high, 
+    // return the sum of values of all nodes with a value in the inclusive range [low, high].
+    
+    test ("testRangeSumBST")  {
+        var root = TreeNode(10, 
+                    Some(TreeNode(5, Some(TreeNode(3)), Some(TreeNode(7)))), 
+                    Some(TreeNode(15, None, Some(TreeNode(18)))))
+
+         assert(32 == binTree.rangeSumBST(Some(root), 7, 15))
+    }
 }
