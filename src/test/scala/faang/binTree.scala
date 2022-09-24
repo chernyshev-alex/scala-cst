@@ -73,4 +73,13 @@ class BinTreeTest extends AnyFunSuite {
 
          assert(32 == binTree.rangeSumBST(Some(root), 7, 15))
     }
+
+    test ("find node")  {
+    var root = TreeNode(10, 
+                Some(TreeNode(5, Some(TreeNode(3)), Some(TreeNode(7)))), 
+                Some(TreeNode(15, None, Some(TreeNode(18)))))
+
+        assert(true == binTree.findNode(Some(root), 18))
+        assert(false == binTree.findNode(Some(root), 99))
+    }
 }

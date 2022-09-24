@@ -27,4 +27,72 @@ object strs {
     do_permutation(s.toCharArray(), 0, s.length()-1)
 	  result
   }
+
+  def longestCommonSubsequence(s1 : String, s2 : String) : Int = {
+      var dp = Array.ofDim[Int](s1.length() +1, s2.length() +1)
+      for {
+          (c1, i) <- s1.zipWithIndex 
+          (c2, j) <- s2.zipWithIndex
+      } yield {
+          dp(i+1)(j+1) = if (c1 == c2) dp(i)(j) + 1 else Math.max(dp(i+1)(j), dp(i)(j+1))
+      }
+      dp(s1.length)(s2.length())
+  }
+
+  def IsPalindrom(s : String) : Boolean =  { 
+    // l ---><--- r
+      val ac = s.toLowerCase().toCharArray()
+      var (l, r) = (0, ac.length -1)
+      while (l < r) {
+        while (l < r && !(ac(l).isDigit || ac(l).isLetter)) { l +=1 }
+        while (l < r && !(ac(r).isDigit || ac(r).isLetter)) { r -=1 }
+        if (ac(l) != ac(r)) {
+          return false
+        }
+        l +=1; r -=1
+      }
+      true
+    }
+
+    def longestPalindromicSubstring(s: String) : String = {
+        def fcheck(left :  Int, right :  Int) : (String, Int) = {
+          var (l , r) = (left, right)
+          while (l >=0 && r < s.length && s.charAt(l) == s.charAt(r) ) {
+            l -= 1;  r += 1
+          }
+          (s.substring(l + 1, r) , r -l -1)
+        }
+
+        var best  = ("", 0)
+        for (i  <- 0 until s.length()) {
+          // fcheck odd and even
+           best = List(fcheck(i, i), fcheck(i, i+1)).foldLeft(best) {
+            case (max_result , ((ss, slen))) => if (slen > max_result._2) (ss, slen)  else max_result
+          }
+        }
+        return best._1
+    }
+
+    def lenLongestSubstringNoRepeatedChars(s : String) : Int =  {
+        if (s.length <= 1)
+            return s.length
+
+        // sliding window
+        val seen = Array.fill(255)(Int.MaxValue)
+        val chars = s.toCharArray()
+        var maxLen = 0;
+        var (l, r) = (0, 0)
+        for (r <- 0 until chars.length) {
+            val c = chars(r)
+            val pos = seen(c)
+            if (pos >= l && pos != Int.MaxValue) {
+                l = pos+1
+            }
+            seen(c) = r
+            maxLen = math.max(maxLen, r-l+1)
+            //r +=1
+        }
+        maxLen
+    }
+
 }

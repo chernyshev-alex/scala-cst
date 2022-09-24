@@ -34,15 +34,4 @@ object dp {
         Math.min(memo(len -1), memo(len -2))
     }   
 
-    def longestCommonSubsequence(s1 : String, s2 : String) : Int = {
-        var dp = Array.ofDim[Int](s1.length() +1, s2.length() +1)
-        for {
-            (c1, i) <- s1.zipWithIndex 
-            (c2, j) <- s2.zipWithIndex
-        } yield {
-            dp(i+1)(j+1) = if (c1 == c2) dp(i)(j) + 1 else Math.max(dp(i+1)(j), dp(i)(j+1))
-        }
-        dp(s1.length)(s2.length())
-    }
-
 }

@@ -47,7 +47,7 @@ object Nums {
 
     def IsPrime(n : Int) : Boolean = {
         if (n <= 1)
-            return  false
+            return false
         else if (n==2)
             return true
 
@@ -56,10 +56,10 @@ object Nums {
             if (n % i == 0)
                 return false
         }
-        true;
+        true
     }
 
-    def  IsPrimeStream(n : Int) : Boolean = ! ((2 until n-1) exists (n % _ == 0))
+    def IsPrimeStream(n : Int) : Boolean = ! ((2 until n-1) exists (n % _ == 0))
 
     def primeStream(s: Stream[Int]): Stream[Int] = {
         Stream.cons(s.head, primeStream(s.tail filter { _ % s.head != 0 }))

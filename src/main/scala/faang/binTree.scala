@@ -100,4 +100,13 @@ object binTree {
         result
     }
 
+    def findNode(root : Option[TreeNode],v : Int) : Boolean = {
+        return root match {
+            case Some(n) if v == n.value =>  true
+            case Some(n) if v < n.value => findNode(n.left, v)
+            case Some(n) if v > n.value => findNode(n.right, v)
+            case None => false
+        }
+    }
+
 }
