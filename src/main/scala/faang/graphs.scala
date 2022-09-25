@@ -95,4 +95,39 @@ object graphs {
     var mx = dist.max
     if (mx == Int.MaxValue) -1 else mx  
   }
+
+  def validPath(n : Int, edges : Array[Array[Int]], source : Int, destination : Int) : Boolean = {
+    if (n ==1)
+      return true
+
+    val map = HashMap.empty[Int, List[Int]]
+    val set = HashSet.empty[Int]
+    val q = Queue.empty[Int]
+
+    edges.foreach {
+      case item => { 
+        map.getOrElseUpdate(item(0), List.empty[Int])
+        map.getOrElseUpdate(item(1), List.empty[Int])
+
+        map.put(item(0), map.get(item(0)).get :+ item(1))
+        map.put(item(1), map.get(item(1)).get :+ item(0))
+      }
+    }
+
+    q.enqueue(source)
+    while (!q.isEmpty) {
+      val current = q.dequeue()
+      if (!set.contains(current)) {
+        set.add(current)
+        val neighbors = map.get(current).get 
+        for (n <- neighbors) {
+          if (n == destination) {
+            return true
+          }
+          q.enqueue(n)
+        }
+      }
+    }
+    false
+  }
 }
