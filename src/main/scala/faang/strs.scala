@@ -54,25 +54,6 @@ object strs {
       true
     }
 
-    def longestPalindromicSubstring(s: String) : String = {
-        def fcheck(left :  Int, right :  Int) : (String, Int) = {
-          var (l , r) = (left, right)
-          while (l >=0 && r < s.length && s.charAt(l) == s.charAt(r) ) {
-            l -= 1;  r += 1
-          }
-          (s.substring(l + 1, r) , r -l -1)
-        }
-
-        var best  = ("", 0)
-        for (i  <- 0 until s.length()) {
-          // fcheck odd and even
-           best = List(fcheck(i, i), fcheck(i, i+1)).foldLeft(best) {
-            case (max_result , ((ss, slen))) => if (slen > max_result._2) (ss, slen)  else max_result
-          }
-        }
-        return best._1
-    }
-
     def lenLongestSubstringNoRepeatedChars(s : String) : Int =  {
         if (s.length <= 1)
             return s.length
@@ -94,5 +75,51 @@ object strs {
         }
         maxLen
     }
+
+    def longestPalindromicSubstring(s: String) : String = {
+        def fcheck(left :  Int, right :  Int) : (String, Int) = {
+          var (l , r) = (left, right)
+          while (l >=0 && r < s.length && s.charAt(l) == s.charAt(r) ) {
+            l -= 1;  r += 1
+          }
+          (s.substring(l + 1, r) , r -l -1)
+        }
+
+        var best  = ("", 0)
+        for (i  <- 0 until s.length()) {
+          // fcheck odd and even
+           best = List(fcheck(i, i), fcheck(i, i+1)).foldLeft(best) {
+            case (max_result , ((ss, slen))) => if (slen > max_result._2) (ss, slen)  else max_result
+          }
+        }
+        return best._1
+    }
+
+
+  def reverseString(s : String)  : String = {
+        // <--- /2-1 ----> exchange
+        val res = s.toCharArray()
+        for (i <- res.length /2 -1 to 0 by -1) {
+            val  idx = res.length -i-1
+            val  tmp = res(i)
+            res(i) = res(idx)
+            res(idx) = tmp
+        }
+        new String(res)
+    }
+
+  def  backSpaceEdit(s1:  String, s2 : String) : Boolean = {
+      def doEdit(s : String) : String = {
+          var b = new StringBuilder();
+          for (ch <- s) {
+              if (ch != '#') b.append(ch);
+              else if (b.length() > 0) {
+                  b.deleteCharAt(b.length() -1);
+              }
+          }
+          return  b.toString();
+      }
+      return doEdit(s1) == (doEdit(s2))
+  }
 
 }

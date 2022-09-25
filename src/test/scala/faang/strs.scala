@@ -21,7 +21,7 @@ class StrsTest extends AnyFunSuite {
        }
 	} 
 
-    test("IsPalindrome") {
+    test("Is Palindrome") {
         val tests = Map[String, Boolean] (
             "A man, a plan, a canal: Panama" -> true, 
             "race a car" -> false, 
@@ -55,5 +55,24 @@ class StrsTest extends AnyFunSuite {
         }
     }
 
+    test("String Reverse") {
+        val tests = Map[String, String] ( //"123456" -> "654321", "123" -> "321"
+		   "1234" -> "4321")
+      	for ((k, v) <-  tests) {
+           assertResult(v)(strs.reverseString(k))
+        }
+    }
 
+	//
+   	// https://leetcode.com/problems/backspace-string-compare/
+   	//
+    // Given two strings s and t, return true if they are equal when both are typed into empty text editors.
+    // '#' means a backspace character.
+	// 
+    test("BackSpace Edit") {
+        val tests = Map[List[String], Boolean] (List("ab#c",  "ad#c") -> true)
+      	for ((k, v) <-  tests) {
+           assertResult(v)(strs.backSpaceEdit(k(0), k(1)))
+        }
+    }
 }
